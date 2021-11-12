@@ -1,2 +1,4 @@
 class Enigma
-end 
+  def initialize
+  end 
+end
