@@ -37,7 +37,7 @@ class Decrypt
         shift = -1
       end
       shift += 1
-      @mm = int - @shifts[shift]
+      @mm = (int - @shifts[shift])
       e = @letters.rotate(@mm)
       coded_msg.concat(e[0])
     end
