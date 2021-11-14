@@ -1,7 +1,7 @@
 require './lib/enigma'
 require './lib/encrypt'
 require './lib/decrypt'
-
+require './spec_helper'
 RSpec.describe Enigma do
   let!(:enigma){Enigma.new}
 
