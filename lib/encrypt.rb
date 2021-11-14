@@ -32,14 +32,19 @@ class Encrypt
     coded_msg = ""
     message_array = @message.chars
     message_array.each do |char|
-      int = @letters.index(char)
-      if shift == 3
-        shift = -1
-      end
-      shift += 1
-      @mm = @shifts[shift] + int
-      e = @letters.rotate(@mm)
-      coded_msg.concat(e[0])
+      if @letters.include?(char) == true
+        int = @letters.index(char)
+        if shift == 3
+          shift = -1
+        end
+        shift += 1
+        @mm = @shifts[shift] + int
+        e = @letters.rotate(@mm)
+        coded_msg.concat(e[0])
+      else
+        coded_msg.concat(char)
+      end 
+
     end
     @enigma_hash[:encryption] = coded_msg
     @enigma_hash
