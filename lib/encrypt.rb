@@ -1,11 +1,10 @@
 require_relative './modules/offsets'
 require_relative './modules/keys'
-
 class Encrypt
   include Offsets
   include Keys
   def initialize(message, key, date)
-    @message = message
+    @message = message.downcase
     @key = key
     @date = date
     @key_hash = self.create_keys(key)
@@ -43,10 +42,22 @@ class Encrypt
         coded_msg.concat(e[0])
       else
         coded_msg.concat(char)
-      end 
+      end
 
     end
     @enigma_hash[:encryption] = coded_msg
     @enigma_hash
-    end
   end
+end
+txt_msg = File.open(ARGV[0], "r")
+key_1 = "82648"
+date_1 = "240818"
+text = txt_msg.read
+txt_msg.close
+# require "pry"; binding.pry
+crypt = Encrypt.new(text, key_1, date_1)
+encrypted = crypt.encrypts
+en_file = File.open(ARGV[1], "w")
+en_file.write(encrypted)
+en_file.close
+puts "Created '#{ARGV[1]}' with the key #{key_1} and date #{date_1}"
