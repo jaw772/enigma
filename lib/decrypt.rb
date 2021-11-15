@@ -5,7 +5,7 @@ class Decrypt
   include Offsets
   include Keys
   def initialize(message, key, date)
-    @message = message
+    @message = message.downcase
     @key = key
     @date = date
     @key_hash = self.create_keys(key)
@@ -32,16 +32,35 @@ class Decrypt
     coded_msg = ""
     message_array = @message.chars
     message_array.each do |char|
-      int = @letters.index(char)
-      if shift == 3
-        shift = -1
+      if @letters.include?(char) == true
+        int = @letters.index(char)
+        if shift == 3
+          shift = -1
+        end
+        shift += 1
+        @mm = (int - @shifts[shift])
+        e = @letters.rotate(@mm)
+        coded_msg.concat(e[0])
+      else
+        coded_msg.concat(char)
       end
-      shift += 1
-      @mm = (int - @shifts[shift])
-      e = @letters.rotate(@mm)
-      coded_msg.concat(e[0])
+
     end
     @enigma_hash[:decryption] = coded_msg
     @enigma_hash
     end
   end
+
+  txt_msg = File.open(ARGV[0], "r")
+  key_1 = "82648"
+  date_1 = "240818"
+  text = txt_msg.read
+  txt_msg.close
+  # require "pry"; binding.pry
+  crypt = Decrypt.new(text, key_1, date_1)
+  decrypted = crypt.decrypts
+  words = decrypted[:decryption]
+  en_file = File.open(ARGV[1], "w")
+  en_file.write(words)
+  en_file.close
+  puts "Created '#{ARGV[1]}' with the key #{key_1} and date #{date_1}"
