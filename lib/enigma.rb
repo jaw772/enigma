@@ -9,13 +9,15 @@ class Enigma
   def initialize
     @shift_counter = -1
     @letters = [*'a'..'z',' ']
-    @shift_array = []
     @dd = Date.today
 
   end
 
-  def shifts(offset_hash, shift_array)
+  def set_up(key, date)
     @shift_counter = -1
+    key_hash = self.create_keys(key)
+    offset_hash = self.create_offset(date)
+    shift_array = key_hash.values
     @shift_array = shift_array
     offset_hash.values.each do |offset|
       @shift_counter += 1
@@ -29,11 +31,8 @@ class Enigma
       date: date
     }
     @shift_counter = -1
-    key_hash = self.create_keys(key)
-    offset_hash = self.create_offset(date)
-    shift_array = key_hash.values
     message = message.downcase
-    shifts(offset_hash, shift_array)
+    set_up(key, date)
     coded_msg = ""
     message_array = message.chars
     message_array.each do |char|
@@ -60,11 +59,8 @@ class Enigma
       date: date
     }
     @shift_counter = -1
-    key_hash = self.create_keys(key)
-    offset_hash = self.create_offset(date)
-    shift_array = key_hash.values
     message = message.downcase
-    shifts(offset_hash, shift_array)
+    set_up(key, date)
     coded_msg = ""
     message_array = message.chars
     message_array.each do |char|
