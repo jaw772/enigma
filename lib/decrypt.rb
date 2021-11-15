@@ -8,6 +8,7 @@ class Decrypt
     @message = message.downcase
     @key = key
     @date = date
+    
     @key_hash = self.create_keys(key)
     @offset_hash = self.create_offset(date)
     @shifts = @key_hash.values
