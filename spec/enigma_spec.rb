@@ -1,8 +1,5 @@
 require './spec_helper'
 require './lib/enigma'
-require './lib/encrypt'
-require './lib/decrypt'
-
 
 RSpec.describe Enigma do
   let!(:enigma){Enigma.new}
@@ -14,7 +11,7 @@ RSpec.describe Enigma do
   end
 
   describe '#encrypt' do
-    it "encrypts a given message" do
+    it "encrypts a given message and ignores punctuation" do
       expected = {
         encryption: "keder ohulw!",
         key: "02715",
@@ -27,7 +24,7 @@ RSpec.describe Enigma do
       expected = {
         encryption: "pkfawfqdzry",
         key: "02715",
-        date: "131121"
+        date: "151121"
       }
       expect(enigma.encrypt("hello world", "02715")).to eq expected
     end
@@ -35,16 +32,17 @@ RSpec.describe Enigma do
     it "encrypts a given message for the current day with a random key" do
       encrypted = enigma.encrypt("hello world")
 
+      allow(encrypted[:date]).to receive("#{@dd}")
       allow(encrypted[:key]).to receive(:random_key)
     end
 
-    it "encrypts a given message for the current day with a capital letter" do
+    it "encrypts a given message with a capital letter" do
       expected = {
         encryption: "pkfawfqdzry",
         key: "02715",
-        date: "131121"
+        date: "151121"
       }
-      expect(enigma.encrypt("hellO World", "02715")).to eq expected
+      expect(enigma.encrypt("hellO World", "02715", "151121")).to eq expected
     end
 
 
@@ -52,22 +50,13 @@ RSpec.describe Enigma do
   end
 
   describe '#decrypt' do
-    it "decrypts a given message" do
+    it "decrypts a given message and ignores punctuation" do
       expected = {
-        decryption: "hello world",
+        decryption: "hello world!",
         key: "02715",
         date: "040895"
       }
-      expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq expected
-    end
-    it "decrypts a given message for the current day" do
-      expected = {
-        decryption: "hello world",
-        key: "02715",
-        date: "131121"
-      }
-      encrypted = enigma.encrypt("hello world", "02715")
-      expect(enigma.decrypt(encrypted[:encryption], "02715")).to eq expected
+      expect(enigma.decrypt("keder ohulw!", "02715", "040895")).to eq expected
     end
   end
 end
