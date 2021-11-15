@@ -51,16 +51,15 @@ class Decrypt
     end
   end
 
-  txt_msg = File.open(ARGV[0], "r")
+  message_file = File.open(ARGV[0], "r")
   key_1 = "82648"
   date_1 = "240818"
-  text = txt_msg.read
-  txt_msg.close
-  # require "pry"; binding.pry
+  message_text = message_file.read
+  message_file.close
   crypt = Decrypt.new(text, key_1, date_1)
   decrypted = crypt.decrypts
-  words = decrypted[:decryption]
-  en_file = File.open(ARGV[1], "w")
-  en_file.write(words)
-  en_file.close
+  decrypted_message = decrypted[:decryption]
+  decrypted_file = File.open(ARGV[1], "w")
+  decrypted_file.write(decrypted_message)
+  decrypted_file.close
   puts "Created '#{ARGV[1]}' with the key #{key_1} and date #{date_1}"
