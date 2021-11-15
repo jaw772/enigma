@@ -49,15 +49,18 @@ class Encrypt
     @enigma_hash
   end
 end
-txt_msg = File.open(ARGV[0], "r")
+
+message_file = File.open(ARGV[0], "r")
 key_1 = "82648"
 date_1 = "240818"
-text = txt_msg.read
-txt_msg.close
+incoming_message = message_file.read
+message_file.close
 # require "pry"; binding.pry
-crypt = Encrypt.new(text, key_1, date_1)
+crypt = Encrypt.new(incoming_message, key_1, date_1)
 encrypted = crypt.encrypts
-en_file = File.open(ARGV[1], "w")
-en_file.write(encrypted)
-en_file.close
+encrypted_message = encrypted[:encryption]
+encrypted_file = File.open(ARGV[1], "w")
+# require "pry"; binding.pry
+encrypted_file.write(encrypted_message)
+encrypted_file.close
 puts "Created '#{ARGV[1]}' with the key #{key_1} and date #{date_1}"
