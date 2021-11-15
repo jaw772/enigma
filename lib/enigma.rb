@@ -44,8 +44,8 @@ class Enigma
         end
         @shift_counter += 1
         rotate_counter = (int + @shift_array[@shift_counter])
-        e = @letters.rotate(rotate_counter)
-        coded_msg.concat(e[0])
+        rotated_letters = @letters.rotate(rotate_counter)
+        coded_msg.concat(rotated_letters[0])
       else
         coded_msg.concat(char)
       end
@@ -75,8 +75,8 @@ class Enigma
         end
         @shift_counter += 1
         rotate_counter = (int - @shift_array[@shift_counter])
-        e = @letters.rotate(rotate_counter)
-        coded_msg.concat(e[0])
+        rotated_letters = @letters.rotate(rotate_counter)
+        coded_msg.concat(rotated_letters[0])
       else
         coded_msg.concat(char)
       end
