@@ -1,7 +1,9 @@
+require './spec_helper'
 require './lib/enigma'
 require './lib/encrypt'
 require './lib/decrypt'
-require './spec_helper'
+
+
 RSpec.describe Enigma do
   let!(:enigma){Enigma.new}
 
@@ -35,6 +37,16 @@ RSpec.describe Enigma do
 
       allow(encrypted[:key]).to receive(:random_key)
     end
+
+    it "encrypts a given message for the current day with a capital letter" do
+      expected = {
+        encryption: "pkfawfqdzry",
+        key: "02715",
+        date: "131121"
+      }
+      expect(enigma.encrypt("hellO World", "02715")).to eq expected
+    end
+
 
 
   end
