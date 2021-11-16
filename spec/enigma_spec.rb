@@ -68,7 +68,7 @@ RSpec.describe Enigma do
         key: "46783",
         date: "151121"
       }
-      require "pry"; binding.pry
+      # "r jvyatcr fccfe"
       expect(enigma.crack(encrypted[:encryption], "151121")).to eq expected
     end
   end
