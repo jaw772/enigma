@@ -14,7 +14,7 @@ Enigma is a WWII decrypting machine used to translate incoming Axis messages. Th
 
 # Self Evaluation
 
-Functionality - 3
-Object Oriented Programming - 3
-Ruby Conventions and Mechanics - 3
-Test Driven Development - 3
+- Functionality - 3
+- Object Oriented Programming - 3
+- Ruby Conventions and Mechanics - 3
+- Test Driven Development - 3
