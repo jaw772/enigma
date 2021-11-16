@@ -39,9 +39,9 @@ class Enigma
     @enigma_hash
   end
 
-  def decrypt(message, key = random_key, date = @dd.strftime("%d%m%y"))
+  def decrypt(ciphertext, key = random_key, date = @dd.strftime("%d%m%y"))
     set_up(key, date)
-    message.downcase.chars.each do |char|
+    ciphertext.downcase.chars.each do |char|
       if @letters.include?(char) == false then @coded_msg.concat(char) else
         rotate_counter = (@letters.index(char) - @shift_array[0])
         @coded_msg.concat(@letters.rotate(rotate_counter)[0])
