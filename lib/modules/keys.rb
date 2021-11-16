@@ -1,5 +1,4 @@
 module Keys
-
   def create_keys(key)
     key_array = key.chars
     key_hash = {}

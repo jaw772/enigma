@@ -13,11 +13,11 @@ RSpec.describe Enigma do
   describe '#encrypt' do
     it "encrypts a given message and ignores punctuation" do
       expected = {
-        encryption: "keder ohulw!",
+        encryption: "keder? ohulw!",
         key: "02715",
         date: "040895"
       }
-      expect(enigma.encrypt("hello world!", "02715", "040895")).to eq expected
+      expect(enigma.encrypt("hello? world!", "02715", "040895")).to eq expected
     end
 
     it "encrypts a given message for the current day" do
