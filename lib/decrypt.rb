@@ -1,6 +1,5 @@
 require_relative './enigma'
 
-
 message_file = File.open(ARGV[0], "r")
 key_1 = "82648"
 date_1 = "240818"
