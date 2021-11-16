@@ -1,19 +1,6 @@
-Runner class
-  encrypt class
-  decrypt class
-  enigma class
-  
-    #encrypt(message, key, date)
-      -returns a hash
-
-    #decrypt(cipher_text, key, date)
-      -returns a hash
-
-  modules
-  
-    fileIO
-    *maybe all in one?
-      -key_generator
-      -offsets
-      -shift
-      -date
+#                                                                 Welcome to ENIGMA!!!
+## Description
+Enigma is a WWII decrypting machine used to translate incoming Axis messages. This version is not recommended for battle type scenarios, but rather used for recreational purposes.
+## How To Use
+1. You must clone this repository to your local machine 
+2. Type in 'Open message.txt' 
