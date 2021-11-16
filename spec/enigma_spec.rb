@@ -62,14 +62,9 @@ RSpec.describe Enigma do
 
   describe '#crack' do
     it "cracks a given message with just a date" do
-      encrypted = enigma.encrypt("this is the end", "46783", "151121")
-      expected = {
-        decryption: "this is the end",
-        key: "46783",
-        date: "151121"
-      }
-      # "r jvyatcr fccfe"
-      expect(enigma.crack(encrypted[:encryption], "151121")).to eq expected
+      encrypted = enigma.encrypt("you will never see the end", "46783", "151121")
+      # "r jvyatcr fccfe" [24, 2, 8, -1]
+      expect(enigma.crack(encrypted[:encryption], "151121")).to eq "you will never see the end"
     end
   end
 
