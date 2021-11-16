@@ -1,7 +1,7 @@
 require_relative './modules/offsets'
 require_relative './modules/keys'
-
 require 'date'
+
 class Enigma
   include Offsets
   include Keys
@@ -10,7 +10,6 @@ class Enigma
     @shift_counter = -1
     @letters = [*'a'..'z',' ']
     @dd = Date.today
-
   end
 
   def set_up(key, date)
