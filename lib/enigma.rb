@@ -23,7 +23,6 @@ class Enigma
       @shift_array.rotate!
     end
     @enigma_hash = { key: key, date: date }
-    # require "pry"; binding.pry
   end
 
   def encrypt(message, key = random_key, date = @dd.strftime("%d%m%y"))
@@ -56,7 +55,7 @@ class Enigma
     rand.to_s[2..6]
   end
 
-  def cracked_shift(message)
+  def cracked_shift(message, date)
     @coded_msg = ""
     known_letters = [" ", "e", "n", "d"]
     @encrypted = message.downcase.chars
@@ -66,10 +65,11 @@ class Enigma
       number - el_index.rotate![-1]
     end
     @shifts.reverse!
+    @enigma_hash = {date: date }
   end
 
   def crack(message, date)
-    cracked_shift(message)
+    cracked_shift(message, date)
     @encrypted.reverse.each do |char|
       if @letters.include?(char) == false then @coded_msg.concat(char) else
         rotate_counter = (@letters.index(char) + @shifts[0])
@@ -77,6 +77,7 @@ class Enigma
         @shifts.rotate!
       end
     end
-    @coded_msg.reverse
+    @enigma_hash[:decryption] = @coded_msg.reverse!
+    @enigma_hash
   end
 end
